@@ -30,16 +30,16 @@ const allowedOrigins = ['http://localhost:3001', process.env.REACT_APP_DEPLOYED_
 app.use(cors(
     {
     credentials:true,
-    // origin: function (origin, callback) {
-    //     // Check if the origin is in the allowed origins list or if it's not defined (for same-origin requests)
-    //     if (!origin || allowedOrigins.includes(origin)) {
-    //       callback(null, true);
-    //     } else {
-    //       callback(new Error('Not allowed by CORS'));
-    //     }
-    //   }}
-    origin:process.env.REACT_APP_DEPLOYED_ORIGIN
-    }
+    origin: function (origin, callback) {
+        // Check if the origin is in the allowed origins list or if it's not defined (for same-origin requests)
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      }}
+    // origin:process.env.REACT_APP_DEPLOYED_ORIGIN
+    
     
 
 ))
