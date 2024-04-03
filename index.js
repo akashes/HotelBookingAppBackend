@@ -23,10 +23,22 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use('/uploads',express.static(__dirname+'/uploads')) 
-app.use(cors({
+const allowedOrigins = ['http://localhost:3001', process.env.REACT_APP_DEPLOYED_ORIGIN];
+
+app.use(cors(
+    {
     credentials:true,
-    origin:'http://localhost:3000'
-}))
+    origin: function (origin, callback) {
+        // Check if the origin is in the allowed origins list or if it's not defined (for same-origin requests)
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      }}
+    
+
+))
 app.use(route)
 
 
