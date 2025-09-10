@@ -9,7 +9,7 @@ const dotenv = require('dotenv').config()
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const cookieParser = require('cookie-parser')
-const fs = require('fs')
+const fs = require('fs') 
 const path = require('path')
 const route = require('./Routes/route')
 const multerConfig = require('./Middlewares/multerMiddleware.js')
@@ -25,10 +25,10 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use('/uploads',express.static(__dirname+'/uploads')) 
-const allowedOrigins = ['http://localhost:3001', process.env.REACT_APP_DEPLOYED_ORIGIN];
+const allowedOrigins = ['http://localhost:3000','https://www.google.com', process.env.REACT_APP_DEPLOYED_ORIGIN];
 
 app.use(cors(
-    {
+    { 
     credentials:true,
     origin: function (origin, callback) {
         // Check if the origin is in the allowed origins list or if it's not defined (for same-origin requests)
@@ -41,8 +41,13 @@ app.use(cors(
     // origin:process.env.REACT_APP_DEPLOYED_ORIGIN
     
     
-
 ))
+// app.use(cors(
+//     {
+//         origin:'http://localhost:3000',
+//         credentials:true
+//     }
+// ))
 app.use(route)
 
 
@@ -160,7 +165,7 @@ app.post('/booking',async(req,res)=>{
     res.json(err)
 
    }
-       
+        
 
 })
 

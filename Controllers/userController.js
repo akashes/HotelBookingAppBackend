@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const UserModel = require('../Models/userModel')
 exports.getUserData=async(req,res)=>{
       //grabbing token from cookie of req
+      console.log('inside') 
       const {token} = req.cookies
       if(token){
           jwt.verify(token,"hacker",{},async(err,tokenData)=>{
@@ -12,4 +13,4 @@ exports.getUserData=async(req,res)=>{
           })
       }
 
-}
+}   
