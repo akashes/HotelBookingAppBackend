@@ -25,7 +25,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use('/uploads',express.static(__dirname+'/uploads')) 
-const allowedOrigins = ['http://localhost:3000','https://www.google.com', process.env.REACT_APP_DEPLOYED_ORIGIN];
+const allowedOrigins = [ 'https://merry-cranachan-0db122.netlify.app/', 'http://localhost:3000','https://www.google.com', process.env.REACT_APP_DEPLOYED_ORIGIN];
 
 app.use(cors(
     { 
