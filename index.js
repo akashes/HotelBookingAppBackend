@@ -27,7 +27,7 @@ const { errorMonitor } = require('stream')
 app.use('/uploads',express.static(__dirname+'/uploads')) 
 
 const allowedOrigins = [
-    'https://aquamarine-dragon-f8c6e5.netlify.app',
+    'https://imaginative-pothos-581c1a.netlify.app/',
     process.env.REACT_APP_DEPLOYED_ORIGIN,
   "https://merry-cranachan-0db122.netlify.app", // deployed frontend
   "http://localhost:3000"                       // local dev
