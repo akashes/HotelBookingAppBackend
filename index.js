@@ -25,23 +25,27 @@ app.use(express.json())
 app.use(cookieParser())
 
 app.use('/uploads',express.static(__dirname+'/uploads')) 
-const allowedOrigins = [ 'https://merry-cranachan-0db122.netlify.app/', 'http://localhost:3000','https://www.google.com', process.env.REACT_APP_DEPLOYED_ORIGIN];
+// const allowedOrigins = [
+//   "https://merry-cranachan-0db122.netlify.app",
+//   "http://localhost:3000" // for local dev
+// ]
 
-app.use(cors(
-    { 
-    credentials:true,
-    origin: function (origin, callback) {
-        // Check if the origin is in the allowed origins list or if it's not defined (for same-origin requests)
-        if (!origin || allowedOrigins.includes(origin)) {
-          callback(null, true);
-        } else {
-          callback(new Error('Not allowed by CORS'));
-        }
-      }}
-    // origin:process.env.REACT_APP_DEPLOYED_ORIGIN
-    
-    
-))
+// app.use(cors({
+//   origin: function(origin, callback) {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true)
+//     } else {
+//       callback(new Error("Not allowed by CORS"))
+//     }
+//   },
+//   credentials: true
+// }))
+
+app.options('*', cors({
+  origin: ["https://merry-cranachan-0db122.netlify.app",'http://localhost:3000'],
+  credentials: true
+}))
+
 // app.use(cors(
 //     {
 //         origin:'http://localhost:3000',
