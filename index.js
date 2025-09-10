@@ -21,28 +21,26 @@ const imageDownloader = require('image-downloader')
 const multer = require('multer')
 const { errorMonitor } = require('stream')
 
-app.use(express.json())
-app.use(cookieParser())
+
+
 
 app.use('/uploads',express.static(__dirname+'/uploads')) 
-// const allowedOrigins = [
-//   "https://merry-cranachan-0db122.netlify.app",
-//   "http://localhost:3000" // for local dev
-// ]
 
-// app.use(cors({
-//   origin: function(origin, callback) {
-//     if (!origin || allowedOrigins.includes(origin)) {
-//       callback(null, true)
-//     } else {
-//       callback(new Error("Not allowed by CORS"))
-//     }
-//   },
-//   credentials: true
-// }))
+const allowedOrigins = [
+    process.env.REACT_APP_DEPLOYED_ORIGIN,
+  "https://merry-cranachan-0db122.netlify.app", // deployed frontend
+  "http://localhost:3000"                       // local dev
+]
 
-app.options('*', cors({
-  origin: ["https://merry-cranachan-0db122.netlify.app",'http://localhost:3000'],
+app.use(cors({
+  origin: function(origin, callback) {
+    // allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error("Not allowed by CORS"))
+    }
+  },
   credentials: true
 }))
 
@@ -52,6 +50,11 @@ app.options('*', cors({
 //         credentials:true
 //     }
 // ))
+
+app.use(express.json())
+app.use(cookieParser())
+
+
 app.use(route)
 
 
