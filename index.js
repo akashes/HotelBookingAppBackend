@@ -197,11 +197,11 @@ const getUserDataFromReq=async(req)=>{
 
 // GET BOOKINGS
 app.get('/bookings',async(req,res)=>{
+    console.log('inside bookings')
    const userData = await getUserDataFromReq(req)
    console.log('userdata is ',userData.id);
    try{
   const bookingDoc = await  BookingModel.find({user:userData.id}).populate('place')
-  console.log('bookingdoc is',bookingDoc);
   res.json(bookingDoc)
    }catch(err){
     res.json(err)

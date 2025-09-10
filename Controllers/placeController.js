@@ -29,13 +29,15 @@ exports.showAllPlaces=async(req,res)=>{
 
 exports.userCreatedAccomodations=async(req,res)=>{
     const {token} = req.cookies
+    console.log(token)
     if(token){
         jwt.verify(token,"hacker",{},async(err,tokenData)=>{
             if(err) throw err
 
             const {id} = tokenData
+            console.log(id)
             res.json(await PlaceModel.find({owner:id}))
-
+ 
    
         })
     }

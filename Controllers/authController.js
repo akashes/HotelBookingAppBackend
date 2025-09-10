@@ -47,7 +47,7 @@ exports.loginUser=async(req,res)=>{
                 
                 jwt.sign(payload,secretKey,{},(err,token)=>{
                     if(err) throw err
-                    res.cookie('token',token,{httpOnly:true,expires:cookieExpiration}).status(200).json(existingUserWithOutPassword)
+                    res.cookie('token',token,{httpOnly:true,expires:cookieExpiration,secure:true,sameSite:"none"}).status(200).json(existingUserWithOutPassword)
                 })
     
             }else{
